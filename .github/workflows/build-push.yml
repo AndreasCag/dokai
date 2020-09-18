@@ -18,10 +18,10 @@ jobs:
           sudo apt-get install -y nvidia-driver-450
           sudo apt-get install -y nvidia-container-toolkit
           sudo apt-get install -y nvidia-container-runtime
-          sudo cp docker_daemon.json /etc/docker/daemon.json
-          sudo systemctl restart docker
+          # sudo cp docker_daemon.json /etc/docker/daemon.json
+          # sudo systemctl restart docker
       - name: Build Docker images
         run: |
-          sudo docker build -f ./docker/Dockerfile.base -t dockai:base .
-          sudo docker build -f ./docker/Dockerfile.pytorch -t dockai:pytorch .
-          sudo docker build -f ./docker/Dockerfile.tensor-stream -t dockai:tensor-stream .
+          docker build -f ./docker/Dockerfile.base -t dockai:base .
+          docker build -f ./docker/Dockerfile.pytorch -t dockai:pytorch .
+          docker build -f ./docker/Dockerfile.tensor-stream -t dockai:tensor-stream .
