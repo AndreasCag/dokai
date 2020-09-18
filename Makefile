@@ -15,6 +15,9 @@ build:
 	docker build -f ./docker/Dockerfile.base -t $(NAME):base .
 	docker build -f ./docker/Dockerfile.pytorch -t $(NAME):pytorch .
 	docker build -f ./docker/Dockerfile.tensor-stream -t $(NAME):tensor-stream .
+	docker rm tensor-stream
+	docker run $(GPUS_OPTION) --name=tensor-stream $(NAME):tensor-stream ./install_tensor_stream.sh
+	docker commit tensor-stream $(NAME):tensor-stream
 
 .PHONY: stop
 stop:
